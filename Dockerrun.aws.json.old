@@ -1,0 +1,36 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "client",
+      "image": "alexlionnel/fibonacci-client-10-14",
+      "hostname": "client",
+      "essential": false
+    },
+    {
+      "name": "server",
+      "image": "alexlionnel/fibonacci-server-10-14",
+      "hostname": "api",
+      "essential": false
+    },
+    {
+      "name": "worker",
+      "image": "alexlionnel/fibonacci-worker-10-14",
+      "hostname": "worker",
+      "essential": false
+    },
+    {
+      "name": "nginx",
+      "image": "alexlionnel/fibonacci-nginx-10-14",
+      "hostname": "nginx",
+      "essential": true,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "links": ["client", "server"]
+    }
+  ]
+}
